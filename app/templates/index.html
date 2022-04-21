@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}Main{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+  <h3>Project 8 : Image segmentation</h3>
+  <p class="lead">
+    <form class="form-inline" method="POST" action="{{ url_for('segmentation') }}">
+      <div class="form-group">
+          <p><FONT size="2">from UI/04-15-2022_073440_UTC/citydata/leftImg8bit/test/bonn/</FONT></p>
+          <div class="input-group">
+            <span class="input-group-addon">Please select</span>
+                <select name="comp_select" class="selectpicker form-control">
+                  {% for img in imglist %}
+                  <option value="{{ img }}">{{ img }}</option>
+                  {% endfor %}
+                </select>
+
+        </div>
+        <button type="submit" class="btn btn-default">Go</button>
+      </div>
+    </form>
+  </p>
+    {% for img in imglist %}
+        <img src="{{IMG_URL}}{{img}}" width="500"/>
+        <p><FONT size="2">{{img}}</FONT></p>
+    {% endfor %}
+</div>
+{% endblock %}
