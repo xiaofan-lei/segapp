@@ -5,7 +5,7 @@ from azureml.core.model import Model
 
 from configparser import ConfigParser
 config = ConfigParser()
-configFilePath = r'C:\configfile\keys_config.cfg'
+configFilePath = r'keys_config.cfg'
 config.read(configFilePath)
 
 ##authentication with service principal
