@@ -3,22 +3,19 @@ from azureml.core.authentication import ServicePrincipalAuthentication
 from azureml.core import Workspace
 from azureml.core.model import Model
 
-from configparser import ConfigParser
-config = ConfigParser()
-configFilePath = r'keys_config.cfg'
-config.read(configFilePath)
+from app import app
 
 ##authentication with service principal
 svc_pr = ServicePrincipalAuthentication(
-    tenant_id=config.get('azure-srv', 'tenant_id'),
-    service_principal_id=config.get('azure-srv', 'application_id'),
-    service_principal_password=config.get('azure-srv', 'svr_password'),
+    tenant_id=app.config['TENANT_ID'],
+    service_principal_id= app.config["APP_ID"],
+    service_principal_password=app.config["SVR_PW"],
     )
 ##getting the workspace
 ws = Workspace(
-    subscription_id=config.get('azure-ws', 'subscription_id'),
-    resource_group=config.get('azure-ws', 'resource_group'),
-    workspace_name=config.get('azure-ws', 'workspace_name'),
+    subscription_id=app.config["SUBSCRIPTION_ID"],
+    resource_group=app.config["RESOURCE_GROUP"],
+    workspace_name=app.config["WS_NAME"],
     auth=svc_pr
     )
 

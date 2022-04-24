@@ -1,7 +1,4 @@
-from flask import  Flask, render_template, request
-app = Flask(__name__)
-# Config options - Make sure you created a 'config.py' file.
-app.config.from_object('config')
+from flask import render_template, request
 
 from urllib.request import urlopen
 import numpy as np
@@ -9,24 +6,17 @@ import cv2
 import re
 import os
 from skimage import color
+
 #get the registred segmentation model
-from app.utils import PSPNetInferrer, mask_to_labelIds, mask_plot, upload_file
+from app import app
+from app.azure_connect import PSPNetInferrer, mask_to_labelIds, mask_plot, upload_file
 model = PSPNetInferrer()
+IMG_URL=app.config['IMG_URL']
 
-#get images form file dataset
-DATASET_URL='https://docsws7974068583.blob.core.windows.net/azureml-blobstore-2ee489bf-29a7-40e9-a468-4950801c3cc6/'
-IMG_URL = DATASET_URL + 'UI/04-15-2022_073440_UTC/citydata/leftImg8bit/test/bonn/'
-imglist = ['bonn_000000_000019_leftImg8bit.png',
-           'bonn_000001_000019_leftImg8bit.png',
-           'bonn_000002_000019_leftImg8bit.png',
-           'bonn_000003_000019_leftImg8bit.png',
-           'bonn_000004_000019_leftImg8bit.png',
-           ]
-
-@app.route('/', methods=['GET','POST'])
+@app.route('/')
 def main():
     #images from url
-    return render_template("index.html", IMG_URL=IMG_URL, imglist=imglist)
+    return render_template("index.html", IMG_URL=IMG_URL, imglist=app.config['IMG_LIST'])
 
 @app.route('/segmentation', methods=['GET','POST'])
 def segmentation():
@@ -60,7 +50,7 @@ def segmentation():
     return render_template('segmentation.html',
                            IMG_URL=IMG_URL,
                            TARGET_PATH=TARGET_PATH,
-                           mask_url=DATASET_URL + TARGET_PATH + '/' + mask_file,
+                           mask_url=app.config['DATASET_URL'] + TARGET_PATH + '/' + mask_file,
                            img_file=img_file,
                            plot_mask=mask_plot(mask),
                            mask_file=mask_file,
