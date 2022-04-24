@@ -4,5 +4,5 @@ opencv-python-headless==4.5.5.64
 segmentation-models==1.0.1
 azureml-core==1.40.0.post1
 configparser==3.7.4
-Flask==1.0.3
+Flask==2.0.3
 matplotlib==3.5.1
