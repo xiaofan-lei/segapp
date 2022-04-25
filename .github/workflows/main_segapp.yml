@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'segapp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_51D332344DBE4A7DBB883E5CB25F724B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C5463C71920B48BF8CBFA1BB637EA223 }}
