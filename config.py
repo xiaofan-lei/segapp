@@ -8,6 +8,7 @@ WS_NAME = 'docs-ws'
 #get images form file dataset
 DATASET_URL='https://docsws7974068583.blob.core.windows.net/azureml-blobstore-2ee489bf-29a7-40e9-a468-4950801c3cc6/'
 IMG_URL = DATASET_URL + 'UI/04-15-2022_073440_UTC/citydata/leftImg8bit/test/bonn/'
+TARGET_PATH = 'UI/04-15-2022_073440_UTC/citydata/gtFine/test'
 IMG_LIST = ['bonn_000000_000019_leftImg8bit.png',
            'bonn_000001_000019_leftImg8bit.png',
            'bonn_000002_000019_leftImg8bit.png',

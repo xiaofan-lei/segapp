@@ -12,6 +12,7 @@ from app import app
 from app.azure_connect import PSPNetInferrer, mask_to_labelIds, mask_plot, upload_file
 model = PSPNetInferrer()
 IMG_URL=app.config['IMG_URL']
+TARGET_PATH=app.config['TARGET_PATH']
 
 @app.route('/')
 def main():
@@ -43,14 +44,13 @@ def segmentation():
     cv2.imwrite('./app/static/upload/' + masked_img_file, result_image)
     cv2.imwrite('./app/static/upload/' + mask_file, mask)
     #upload to the dataset
-    mask_file_path = os.path.join(app.root_path, 'static/upload', mask_file)
-    TARGET_PATH='UI/04-15-2022_073440_UTC/citydata/gtFine/test'
-    upload_file(mask_file_path, TARGET_PATH)
+    masked_file_path = os.path.join(app.root_path, 'static/upload', masked_img_file)
+    upload_file(masked_file_path, TARGET_PATH)
 
     return render_template('segmentation.html',
                            IMG_URL=IMG_URL,
                            TARGET_PATH=TARGET_PATH,
-                           mask_url=app.config['DATASET_URL'] + TARGET_PATH + '/' + mask_file,
+                           mask_url=app.config['DATASET_URL'] + TARGET_PATH + '/' + masked_img_file,
                            img_file=img_file,
                            plot_mask=mask_plot(mask),
                            mask_file=mask_file,

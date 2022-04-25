@@ -7,10 +7,10 @@
   </p>
      <img src="{{IMG_URL}}{{img_file}}" width="500"/>
          <p><FONT size="2">{{img_file}}</FONT></p>
-     <img src="static/upload/{{masked_img_file}}" width="500"/>
-         <p><FONT size="2">{{masked_img_file}}</FONT></p>
      <img src='data:image/png;base64,{{plot_mask}}' width="500"/>
-        <p><FONT size="2">{{mask_file}} (saved to azure dataset {{TARGET_PATH}})</FONT></p>
+        <p><FONT size="2">{{mask_file}}</FONT></p>
+     <img src="static/upload/{{masked_img_file}}" width="500"/>
+         <p><FONT size="2">{{masked_img_file}} (saved to azure dataset {{TARGET_PATH}})</FONT></p>
         <a href="{{mask_url}}">download</a>
  </div>
 {% endblock %}
